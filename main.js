@@ -12,7 +12,9 @@ import {
   updateNotion,
   deleteNotion,
 } from "./database/notion.js";
+import cors from "cors";
 const app = express();
+app.use(cors({ origin: ["http://localhost:5173", "http://localhost:5432"] }));
 app.use(bodyParser.json());
 app.get("/user", async (req, res) => {
   try {
