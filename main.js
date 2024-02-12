@@ -16,6 +16,11 @@ import cors from "cors";
 const app = express();
 app.use(cors({ origin: ["http://localhost:5173", "http://localhost:5432"] }));
 app.use(bodyParser.json());
+app.use((req, res, next) => {
+  console.log(`${req.method} request for ${req.url}`);
+  if (req.body) console.log(req.body);
+  next();
+});
 app.get("/user", async (req, res) => {
   try {
     let users = await getUser();
